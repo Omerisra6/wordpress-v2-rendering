@@ -1,0 +1,7 @@
+<div class="e-loop" style="display: flex; gap: 10px; margin-top: 50px; flex-wrap: wrap; justify-content: center;">
+    {% if loop is iterable %}
+        {% for item in loop %}
+            {{ item | raw}}
+        {% endfor %}
+    {% endif %}
+</div>

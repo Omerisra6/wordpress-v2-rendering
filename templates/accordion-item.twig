@@ -1,0 +1,14 @@
+<div class="e-accordion-item">
+    <button
+            class="e-accordion-title  {% if classNames is iterable %}{{ classNames | join(' ') }}{% endif %}"
+            style="width: 100%;"
+    >
+        {{ accordionTitle | join | raw }}
+    </button>
+    <div
+            class="e-accordion-content {% if classNames is iterable %}{{ classNames | join(' ') }}{% endif %}"
+            style="display: block; padding: 25px;"
+    >
+        {{ accordionContent | join | raw }}
+    </div>
+</div>

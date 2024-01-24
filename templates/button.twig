@@ -1,0 +1,5 @@
+<button
+        class="{% if classNames is iterable %}{{ classNames | join(' ') }}{% endif %}"
+>
+    {{ content | raw }}
+</button>

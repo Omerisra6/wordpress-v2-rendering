@@ -1,0 +1,5 @@
+{% if className %}
+    <span class="{{ className | join( ' ' ) }}">{{ value }}</span>
+{% else %}
+    {{ value }}
+{% endif %}
