@@ -8,24 +8,19 @@ Author: Your Name
 require_once __DIR__ . '/vendor/autoload.php';
 use Rendering\RenderEngine;
 
-add_action('the_post', 'custom_render_admin_post');
+add_filter('the_content', 'custom_render_admin_post');
 
 function custom_render_admin_post() {
     global $post;
 
-    // Check if this is a post edit screen
-    if (isset($_GET['action']) && $_GET['action'] === 'edit' && isset($post->ID)) {
-        // Get the post content
+    $time_start = microtime(true);
+    $elements_json = get_post_meta($post->ID, '_v2_content', true);
+    $styles_json = get_post_meta($post->ID, '_v2_styles', true);
+    // Render the content using your custom engine
+    $elements = json_decode($elements_json, true);
+    $styles = json_decode($styles_json, true);
 
-        $elements_json = get_post_meta($post->ID, '_v2_content', true);
-        $styles_json = get_post_meta($post->ID, '_v2_styles', true);
-        // Render the content using your custom engine
-        $elements = json_decode($elements_json, true);
-        $styles = json_decode($styles_json, true);
+    $render_engine = new RenderEngine($elements, $styles);
 
-        $render_engine = new RenderEngine($elements, $styles);
-        $rendered_content = $render_engine->render();
-        echo $rendered_content;
-        exit();
-    }
+    return $render_engine->render();
 }
